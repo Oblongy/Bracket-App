@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Bracket</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; }
+    textarea { width: 100%; height: 200px; }
+  </style>
+</head>
+<body>
+  <h1>Create Double Elimination Bracket</h1>
+  <label>Enter player names (one per line):</label><br>
+  <textarea id="players"></textarea><br>
+  <button onclick="createBracket()">Create Bracket</button>
+
+  <script>
+    async function createBracket() {
+      const input = document.getElementById('players').value.trim();
+      const players = input.split('\n').map(p => p.trim()).filter(p => p);
+      if (![8, 16, 32].includes(players.length)) {
+        alert('Please enter 8, 16, or 32 players.');
+        return;
+      }
+      const res = await fetch('/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ players })
+      });
+      const data = await res.json();
+      window.location.href = `/bracket/${data.id}`;
+    }
+  </script>
+</body>
+</html>
