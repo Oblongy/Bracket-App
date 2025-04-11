@@ -1,27 +1,129 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Bracket</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bracket Viewer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: sans-serif; padding: 2rem; }
-    .match { margin-bottom: 1rem; }
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #4CAF50;
+      color: #fff;
+      padding: 1rem 2rem;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-weight: 700;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    .bracket-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .bracket {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .bracket h2 {
+      color: #4CAF50;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .match {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .match:last-child {
+      border-bottom: none;
+    }
+
+    .match span {
+      color: #555;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #4CAF50;
+      color: #fff;
+    }
+
+    @media (max-width: 768px) {
+      .bracket-container {
+        padding: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>Double Elimination Bracket</h1>
-  <div id="bracket"></div>
+  <header>
+    <h1>Bracket Viewer</h1>
+  </header>
+  <main>
+    <div class="bracket-container">
+      <div class="bracket">
+        <h2>Bracket 1</h2>
+        <div class="match">
+          <span>Player 1</span>
+          <span>vs</span>
+          <span>Player 2</span>
+        </div>
+        <div class="match">
+          <span>Player 3</span>
+          <span>vs</span>
+          <span>Player 4</span>
+        </div>
+      </div>
 
-  <script>
-    const bracketId = window.location.pathname.split('/').pop();
-
-    async function loadBracket() {
-      const res = await fetch(`/api/bracket/${bracketId}`);
-      const data = await res.json();
-      const div = document.getElementById('bracket');
-      div.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
-    }
-
-    loadBracket();
-  </script>
+      <div class="bracket">
+        <h2>Bracket 2</h2>
+        <div class="match">
+          <span>Player 5</span>
+          <span>vs</span>
+          <span>Player 6</span>
+        </div>
+        <div class="match">
+          <span>Player 7</span>
+          <span>vs</span>
+          <span>Player 8</span>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2025 Bracket App. All rights reserved.</p>
+  </footer>
 </body>
 </html>
